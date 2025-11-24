@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuadernos pedagógicos | Partituras de Interacción PiX</title>
+    
+    <!-- Estilos y fuentes -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.min.js"></script>
+</head>
+<body>
+    <div class="screen-content interior-page-content"> 
+        
+        <!-- Header principal -->
+        <header class="main-header">
+            <div class="menu-icon" id="menuIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-logo">
+                <a href="index.html" class="header-link">LibroWeb PiX</a>
+            </div>
+        </header>
+
+        <!-- Menú lateral -->
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="sidebar-logo">
+                <a href="index.html">
+                    <img src="logopix.png" alt="PiX Logo" class="pix-logo-sidebar">
+                </a>
+            </div>
+            <ul>
+                <li><a href="prologo.html">Prólogo</a></li>
+                <li><a href="intro.html">Introducción</a></li>
+                <li><a href="teoria.html">Teoría</a></li>
+                <li><a href="acerca.html">Acerca del Libro</a></li>
+                
+                <!-- Submenú de casos -->
+                <li class="has-submenu">
+                    <a href="casos.html" class="nav-link-pure">Casos de uso</a>
+                    <span class="submenu-toggle-arrow" id="casosToggleIcon" data-target="casos-submenu">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; display: block;">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </span>
+                    <ul class="submenu" id="casos-submenu">
+                        <li><a href="casos_cuadernos.html">Cuadernos pedagógicos</a></li>
+                        <li><a href="casos_uxdi.html">UXDI</a></li>
+                        <li><a href="casos_cepal.html">CEPAL</a></li>
+                        <li><a href="casos_saldo.html">Saldo Insoluto</a></li>
+                        <li><a href="casos_memento.html">Memento</a></li>
+                        <li><a href="casos_mvp.html">MVP sistema de atención solicitantes</a></li>
+                        <li><a href="casos_delivery.html">Delivery</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="bibliografia.html">Bibliografía</a></li>
+            </ul>
+        </nav>
+
+        <!-- Contenido principal -->
+        <main class="main-content page-layout">
+            <section class="scrollable-content">
+                <div class="page-text-wrapper">
+                    <h1 class="case-title">Empresa Cumplo - MVP</h1>
+                </div>
+
+                <div class="ficha-proyecto">
+                    <p class="ficha-item"><strong>Año:</strong> Desde 2022</p>
+                    <p class="ficha-item"><strong>Ciudad/País:</strong> Chile / México / Perú</p>
+                    <p class="ficha-item"><strong>Equipo:</strong> Camila Alvarado, Diseñadora UX, MVP sistema de Atención Solicitantes</p>
+                    <p class="ficha-item"><strong>Tipo de institución:</strong> Servicios financieros y tecnología (fintech)</p>
+                </div>
+
+                <div class="page-text-wrapper">
+                    <h2 class="subtitle">Contexto del proyecto</h2>
+                    <p>Este caso se desarrolla dentro de Cumplo, una empresa fintech enfocada en ofrecer financiamiento a pequeñas y medianas empresas (pymes) a través del adelanto de facturas. En este sistema, una pyme que debe esperar 60 o 90 días para recibir el pago de una factura puede solicitar a Cumplo el adelanto de ese dinero, recibiendo liquidez inmediata a cambio de un pequeño porcentaje de comisión.</p>
+
+                    <p>El proyecto fue liderado por Camila Alvarado, product designer, quien impulsó la implementación de PiX en el diseño del MVP del sistema de atención a solicitantes. El objetivo general era mejorar la coordinación entre equipos de diseño y desarrollo, en un entorno de trabajo ágil y remoto. El equipo estaba conformado por desarrolladores backend y frontend, un product manager y diseñadores UX, todos trabajando de manera colaborativa desde distintas ubicaciones.</p>
+
+                    <h2 class="subtitle">Objetivos del uso de PiX</h2>
+                    <p>El principal objetivo al implementar PiX en Cumplo fue mejorar la claridad y coordinación entre los distintos actores del proyecto, especialmente con el equipo de desarrollo. Se buscaba representar de forma visual los flujos del sistema para poder estimar tiempos, definir pantallas a diseñar y alinear las expectativas técnicas desde el inicio del ciclo de desarrollo.</p>
+
+                    <p>PiX se utilizó principalmente durante la etapa de descubrimiento (discovery) de cada ciclo, como herramienta de co-creación y planificación anticipada. Todos los miembros del equipo —product manager, diseñadores y desarrolladores— participaban en la elaboración de las partituras, lo que permitió identificar desde un comienzo qué datos debían ser traídos por el sistema, qué acciones realizaría el usuario y cómo se conectaban entre sí los distintos componentes del servicio.</p>
+
+                    <h2 class="subtitle">Desarrollo del caso</h2>
+                    <p>El proyecto fue desarrollado de forma remota, con todas las sesiones de trabajo realizadas online, principalmente mediante la plataforma Miro. En estas sesiones, el equipo cocreaba partituras para cada uno de los ciclos de desarrollo, incluyendo procesos como carga masiva de facturas, cotización, registro, firma de contrato y aprobación.</p>
+
+                    <p>La dinámica consistía en que Camila guiaba la construcción del PiX, incorporando aportes del equipo mientras lo diseñaba en tiempo real. Se añadieron elementos gráficos adicionales, como flechas para guiar la lectura, y se categorizó cada etapa con barras moradas que indicaban en qué fase del servicio se encontraba cada acción (registro, login, carga, cotización, etc.).</p>
+
+                    <p>Además, se documentaron datos adicionales directamente en la partitura, como los campos específicos que debía traer cada pantalla del sistema (por ejemplo: razón social, dirección georreferenciada, filtros de búsqueda). Esta riqueza de detalles permitió al equipo técnico anticipar el trabajo necesario en backend y frontend, reduciendo errores y malentendidos.</p>
+
+                    <p>La metodología demostró ser especialmente útil para proyectos con múltiples versiones regionales: se realizaron adaptaciones para Chile, México e incluso Bolivia, considerando las diferencias legales y técnicas entre países.</p>
+
+                    <p class="citation-text">“El diálogo entre diseño y desarrollo a veces puede tornarse muy complejo. Con PiX lográbamos claridad desde el inicio del ciclo.”</p>
+                    <p class="citation-text">“Las partituras nos ayudaban a estimar tiempos y a saber qué tenía que hacer el sistema cuando el usuario realizaba una acción específica.”</p>
+
+                    <h2 class="subtitle">Reflexiones y aprendizajes</h2>
+                    <p>El uso de PiX en el proyecto Cumplo transformó la forma en que el equipo abordaba el diseño de servicios digitales. Las partituras sirvieron como lenguaje común entre diseñadores, product managers y desarrolladores, reduciendo fricciones y promoviendo una cultura de colaboración efectiva.</p>
+
+                    <p>Uno de los principales aprendizajes fue que PiX permite anticipar requerimientos técnicos desde una mirada visual, reduciendo iteraciones y retrabajo. También quedó claro que el valor de la herramienta no está solo en su estética, sino en su capacidad de facilitar acuerdos y alinear expectativas entre distintos roles.</p>
+
+                    <p>Entre las sugerencias de mejora, Camila destacó la necesidad de ampliar las emociones disponibles en la plantilla PiX y fomentar el uso libre de iconografías o emojis para representar mejor la experiencia del usuario. También propuso que cada partitura incluya conectores para facilitar la lectura, especialmente cuando es revisada por personas que no participaron de su creación.</p>
+
+                    <h2 class="subtitle">Conclusión</h2>
+                    <p>El caso Cumplo demuestra que PiX puede tener un impacto significativo en entornos ágiles y técnicos. Aporta claridad, reduce ambigüedades y fortalece la colaboración entre equipos multidisciplinarios. Su aplicación permitió desarrollar un MVP centrado en el usuario y técnicamente sólido, adaptado a contextos multiculturales. Este ejemplo confirma que PiX no solo es útil en ámbitos educativos o sociales, sino que también tiene un lugar estratégico en el mundo del desarrollo de productos digitales.</p>
+
+                    <!-- Navegación entre casos -->
+                    <div class="page-navigation">
+                        <a href="./casos_memento.html" class="nav-link prev">
+                            <span class="arrow-left">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="15 18 9 12 15 6"></polyline>
+                                </svg>
+                            </span>
+                            Anterior
+                        </a>
+
+                        <a href="./casos_delivery.html" class="nav-link next">
+                            Siguiente 
+                            <span class="arrow-right">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="9 18 15 12 9 6"></polyline>
+                                </svg>
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="final-spacer"></div>
+                </div>
+            </section>
+            <section class="fixed-visual">
+                <div id="p5-container" class="p5-container"></div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script src="mvp_sketch.js"></script>
+</body>
+</html>

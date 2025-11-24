@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casos de  | Partituras de Interacción PiX</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="screen-content interior-page-content"> 
+        
+        <header class="main-header">
+            <div class="menu-icon" id="menuIcon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="header-logo">
+                <a href="index.html" class="header-link">
+                    LibroWeb PiX
+                </a>
+            </div>
+        </header>
+
+        <nav class="sidebar-nav" id="sidebarNav">
+            <div class="sidebar-logo">
+                <a href="index.html">
+                <img src="logopix.png" alt="PiX Logo" class="pix-logo-sidebar">
+                </a>
+            </div>
+            <ul>
+                <li><a href="prologo.html">Prólogo</a></li>
+                <li><a href="intro.html">Introducción</a></li>
+                <li><a href="teoria.html">Teoría</a></li>
+                <li><a href="acerca.html">Acerca del Libro</a></li>
+                
+                <li class="has-submenu">
+    
+    <a href="casos.html" class="nav-link-pure">
+        Casos de uso
+    </a>
+    
+    <span class="submenu-toggle-arrow" id="casosToggleIcon" data-target="casos-submenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 12px; height: 12px; display: block;">
+            <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+    </span>
+    
+    <ul class="submenu" id="casos-submenu">
+        <li><a href="casos_cuadernos.html">Cuadernos pedagógicos</a></li>
+        <li><a href="casos_uxdi.html">UXDI</a></li>
+        <li><a href="casos_cepal.html">CEPAL</a></li>
+        <li><a href="casos_saldo.html">Saldo Insoluto</a></li>
+        <li><a href="casos_memento.html">Memento</a></li>
+        <li><a href="casos_mvp.html">MVP sistema de atención solicitantes</a></li>
+        <li><a href="casos_delivery.html">Delivery</a></li>
+    </ul>
+</li>
+                <li><a href="bibliografia.html">Bibliografía</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content page-layout">
+            <section class="scrollable-content">
+                <div class="page-text-wrapper">
+                    <h1>Bibliografía</h1>
+
+                    <p>Las Partituras de Interacción PiX son un lenguaje visual concebido para modelar, representar y facilitar el diseño de interacciones entre personas y sistemas, especialmente en entornos digitales. Su origen se remonta al año 2008 en la Escuela de Arquitectura y Diseño de la Pontificia Universidad Católica de Valparaíso (e[ad] PUCV), como parte de un proyecto académico que buscaba generar nuevas herramientas para el ámbito profesional del Diseño de Interacción (IxD) y la Experiencia de Usuario (UX).</p>
+
+                   
+                  <div class="page-navigation">
+        
+        <a href="casos.html" class="nav-link prev">
+           <span class="arrow-left">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </span> Anterior
+        </a>
+
+    </div>
+
+                 <div class="final-spacer"></div>
+                </div>
+            </section>
+            <section class="fixed-visual"></section>
+            <div id="p5-container-acerca"></div>
+        </main>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <!-- 2. Carga tu NUEVO sketch de bibliografía -->
+    <script src="bibliografia_sketch.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

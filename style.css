@@ -1,0 +1,991 @@
+/* =========================================
+   VARIABLES
+   ========================================= */
+:root {
+    --laptop-frame-color: #333;
+    
+    /* DEFINICIÓN DE COLORES BASE */
+    --gray-bg-color: #dcdcdc; /* Gris para barra y botones */
+    --lila-bg-color: #efe7f4; /* Lila muy sutil para el fondo de página */
+    --content-col-bg:#f8f8f8; /* Gris claro para el fondo del texto */
+    --visual-col-bg: #ffffff; /* Blanco para el fondo de la imagen */
+    
+    --sidebar-width: 250px;
+    --book-shadow-color: rgba(0, 0, 0, 0.2);
+    
+    --header-height: 40px; 
+    --header-bg-color: #E3653B; 
+    --header-text-color: #fff;
+    --page-text-color: #333;
+    
+    /* ASIGNACIONES FINALES */
+    --sidebar-bg-color: var(--gray-bg-color); 
+    --button-bg-color: var(--gray-bg-color); 
+    --page-bg-color: var(--lila-bg-color); 
+}
+
+/* Importar fuentes */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Roboto:wght@400;700&display=swap');
+
+
+/* =========================================
+   BASE & FULL SCREEN SETUP
+   ========================================= */
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    width: 100vw;
+    background-color: var(--page-bg-color); 
+    
+    overflow-y: auto;
+    overflow-x: hidden; 
+}
+
+.laptop-frame {
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+    background-color: transparent;
+    display: block; 
+}
+
+.screen-content {
+    background-color: var(--page-bg-color); 
+    width: 100vw; 
+    height: 100vh; 
+    border-radius: 0; 
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden !important; 
+}
+
+/* BARRA GRIS LATERAL IZQUIERDA (index.html) */
+.screen-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 60px; 
+    background-color: var(--gray-bg-color); 
+    z-index: 10; 
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+.main-header {
+    width: 100%;
+    height: var(--header-height);
+    padding: 0 20px; 
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100; 
+    background-color: transparent; 
+    color: #333; 
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================= */
+/* ESTILO DEFINITIVO DEL ÍCONO DE HAMBURGUESA */
+/* ========================================= */
+
+/* ========================================= */
+/* ESTILO DEFINITIVO DEL ÍCONO DE HAMBURGUESA */
+/* ========================================= */
+
+.menu-icon {
+    width: 24px;
+    height: 18px; /* Mantendremos esta altura */
+    cursor: pointer;
+    
+    position: absolute; 
+    left: 18px; /* Mantendremos tu valor de left */
+    z-index: 130;
+    
+    display: block; 
+    padding: 0;
+    margin: 0;
+    
+    /* 💥 SOLUCIÓN DE ACELERACIÓN: Fuerza el correcto renderizado de píxeles */
+    transform: translateZ(0); 
+}
+
+/* 2. BARRAS DEL ÍCONO */
+.menu-icon span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--header-text-color); 
+    border-radius: 1px;
+    
+    /* Posicionamiento absoluto y transiciones */
+    position: absolute; 
+    left: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* 3. POSICIONAMIENTO CON PRECISIÓN DE PÍXELES ENTEROS */
+
+/* Barra Superior (1/3): Empieza en 0 */
+/* Barra Superior (1/3) */
+.menu-icon span:nth-child(1) {
+    top: 0; 
+}
+
+/* 💥 Barra Central (2/3): Posición exacta a 8px del tope */
+.menu-icon span:nth-child(2) {
+    /* (18px de altura - 6px de líneas) / 2 = 6px de espacio. 
+       Línea superior (2px) + Espacio superior (6px) = 8px. */
+    top: 8px; 
+    transform: none;
+}
+
+/* Barra Inferior (3/3) */
+.menu-icon span:nth-child(3) {
+    /* 18px (altura total) - 2px (grosor de línea) = 16px. */
+    top: 16px; 
+    transform: none;
+}
+
+/* === Estilo específico para header naranja (Asegura el color blanco) === */
+.interior-page-content .main-header .menu-icon span {
+    background-color: var(--header-text-color); 
+}
+
+.header-logo {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.header-logo .header-link {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: var(--header-text-color);
+    text-decoration: none;
+}
+
+/* === HEADER ESPECÍFICO PARA PÁGINAS INTERIORES === */
+
+.interior-page-content .main-header {
+    background-color: var(--header-bg-color); 
+    color: var(--header-text-color); 
+    justify-content: flex-start; 
+}
+
+.interior-page-content .main-header .menu-icon {
+    position: absolute; 
+    left: 20px;
+    margin-left: 0;
+}
+
+.interior-page-content .main-header .menu-icon span {
+    background-color: var(--header-text-color) !important; 
+}
+
+.interior-page-content .main-header .header-logo {
+    margin-left: auto; 
+    margin-right: 20px;
+}
+
+
+/* =========================================
+   SIDEBAR (Menú Desplegable) - SCROLL SUTIL
+   ========================================= */
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--sidebar-width);
+    height: 100vh;
+    background-color: var(--sidebar-bg-color); 
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 110; 
+    padding-top: var(--header-height); 
+    box-sizing: border-box;
+    
+    overflow-y: auto; 
+    overflow-x: hidden;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
+    
+    transform: translateX(calc(-1 * var(--sidebar-width)));
+    transition: transform 0.3s ease-out;
+}
+
+/* Webkit (Chrome, Safari) */
+.sidebar-nav::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.sidebar-nav.active {
+    transform: translateX(0);
+}
+
+.sidebar-logo {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.pix-logo-sidebar {
+    height: 50px;
+    width: auto;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+/* === ESTILO DE ENLACES PRINCIPALES DEL MENÚ === */
+.sidebar-nav ul li a {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400; 
+    font-size: 1.25rem; 
+    color: #333; 
+    
+    display: block;
+    padding: 35px 55px; 
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav ul li a:hover {
+   
+    color: #555; 
+}
+
+/* =========================================
+   ESTILOS SUBMENÚ (CASOS DE USO)
+   ========================================= */
+
+.submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    max-height: 0; 
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.submenu.active {
+    max-height: 800px; 
+}
+
+.submenu li {
+    /* 💥 ELIMINAMOS LA VIÑETA NATIVA */
+    list-style: none; 
+    
+    /* Restauramos una posición de lista básica para el contenido */
+    margin-left: 20px; /* Base de alineación */
+    padding-left: 0;
+    
+    /* Mantienes los ajustes de compactación vertical */
+    margin-top: -38px; 
+    margin-bottom: -38px; 
+    line-height: 1.0;
+}
+
+/* CREACIÓN DE LA VIÑETA (Punto Negro) */
+.submenu li::before {
+    content: '•'; /* El carácter de viñeta */
+    color: #333; /* Color negro del texto */
+    
+    /* 💥 POSICIONAMIENTO ABSOLUTO PARA MOVERLA */
+    position: absolute; 
+    
+    /* Mueve la viñeta hacia la derecha (hacia el texto) */
+    left: 40px; /* AJUSTA ESTE VALOR (10px). Cuanto MAYOR, más a la derecha. */
+    
+    /* Alineación vertical con el texto */
+    top: 50%;
+    transform: translateY(-50%);
+    
+    /* Aseguramos que el contenedor sea el punto de referencia */
+    /* Nota: Esto requiere que .submenu li tenga position: relative; */
+}
+
+/* 3. Asegurar la Posición de Referencia y el Texto */
+.submenu li {
+    /* DEBE TENER ESTO PARA QUE ::before funcione */
+    position: relative; 
+    margin-left: 1px; /* Reducimos este valor para acercar el inicio del listado */
+    padding-left: 0;
+    
+}
+
+.submenu a {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-style: italic;
+    
+    font-size: 0.875rem !important; 
+    
+    color: #333 !important; 
+    
+    padding: 0 30px 0 30px; 
+    line-height: 1.1; 
+    /* Para que el texto se mantenga alineado verticalmente */
+    text-align: left;
+    display: block;
+    
+}
+
+.submenu a:hover {
+  
+    color: #555 !important; 
+}
+
+
+/* =========================================
+   CONTENIDO PORTADA (index.html)
+   ========================================= */
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; 
+    position: relative;
+    height: 100%;
+}
+
+/* Botones laterales */
+.sidebar-buttons {
+    position: absolute;
+    right: 50px; 
+    top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 2; 
+}
+
+.action-button {
+    background-color: var(--button-bg-color);
+    color: #333;
+    border: none;
+    border-radius: 25px;
+    padding: 15px 25px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    width: 200px; 
+    text-align: center;
+    text-decoration: none; 
+}
+
+.action-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Libro 3D */
+.book-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: transparent;
+    transform: translate(-50%, -50%) rotateY(20deg) rotateX(5deg);
+    perspective: 1000px;
+    transition: all 0.3s ease; 
+}
+
+.book-cover {
+    width: 250px;
+    height: auto;
+    box-shadow: 10px 10px 30px var(--book-shadow-color);
+    display: block;
+}
+
+/* =========================================
+   ESTILOS ESPECÍFICOS PARA PÁGINAS INTERIORES
+   ========================================= */
+
+/* SOLUCIÓN: OCULTAR BARRA GRIS EN PÁGINAS INTERIORES */
+.interior-page-content::before {
+    content: '';
+    width: 0 !important; 
+}
+
+.main-content.page-layout .sidebar-buttons,
+.main-content.page-layout .book-container {
+    display: none !important; 
+}
+
+.main-content.page-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding: 0; 
+    background-color: var(--visual-col-bg); 
+    margin-top: var(--header-height);
+    height: calc(100vh - var(--header-height)); 
+    width: 100%; 
+    margin-left: 0; 
+    flex-direction: row-reverse;
+}
+
+.scrollable-content {
+    width: 50%;
+    height: 100%; 
+    
+    /* MARGEN PARA TEXTO: 90px superior, 40px inferior, 20px derecho, 50px izquierdo */
+    padding: 90px 20px 350px 50px; /* Reducimos el padding-bottom para que el h2 sea visible */
+    padding-bottom: 80px;
+    background-color: var(--content-col-bg); 
+    position: relative;
+    overflow-y: scroll; 
+    overflow-x: hidden;
+    color: var(--page-text-color);
+    text-align: left;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.fixed-visual {
+    width: 50%;
+    height: 100%; 
+    background-image: url('pattern-background.png');
+    background-color: var(--visual-col-bg); 
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+/* Sangría del primer párrafo */
+.page-text-wrapper {
+    text-indent: 2em; 
+}
+
+/* Margen derecho del texto y espaciado de título */
+.page-text-wrapper {
+    max-width: 100%; 
+    margin: 0; 
+}
+
+/* TÍTULO H1: CORREGIDO EL MARGEN LATERAL */
+.page-text-wrapper h1 {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+    font-size: 2.25rem; 
+    color: var(--header-bg-color); 
+    margin-top: 0;
+    margin-bottom: 70px; 
+    text-align: left;
+    margin-left: 50px; /*corrección CLAVE: Elimina el margin-left de 50px */
+    text-indent: 0 !important;
+}
+
+/* ESTILO DEL SUBTÍTULO (h2): CORREGIDO EL MARGEN LATERAL Y VISIBILIDAD */
+.page-text-wrapper h2.subtitle {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600; 
+    font-size: 1.5rem; /* 24px */
+    color: var(--page-text-color, #333); 
+    text-indent: 0 !important;
+    /* SOLUCIÓN VISIBILIDAD: Reducimos el margin-top para que aparezca inmediatamente */
+    margin-top: 40px; 
+    margin-bottom: 40px; 
+    
+    text-align: left;
+    margin-left: 50px; /* CORRECCIÓN CLAVE: Elimina el margin-left de 50px */
+}
+
+.page-text-wrapper p {
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--page-text-color, #333); 
+    line-height: 1.6;
+    margin-bottom: 35px;
+    
+    /* 🔥 LÍNEA CLAVE A AGREGAR para aplicar la sangría a TODOS los párrafos */
+    text-indent: 2em; 
+    
+    margin-right: 70px; 
+    margin-left: 50px;
+}
+
+
+/* FORZAR MARGEN INFERIOR GRANDE AL ÚLTIMO PÁRRAFO VISIBLE */
+.page-text-wrapper p:last-child {
+    /* Mantenemos esta regla para el margen entre el penúltimo y el último párrafo */
+    margin-bottom: 35px;
+}
+
+/* NUEVA REGLA: Forzar un espacio en blanco grande después del último contenido */
+.page-text-wrapper .final-spacer {
+    height: 100px; /* Altura de margen */
+    margin-top: 50px; /* Espacio extra sobre el margen */
+    padding-bottom: 50px; /* Espacio adicional, si es necesario */
+    clear: both;
+}
+
+/* NUEVA REGLA: Forzar el margen final en el último elemento (el H2) */
+.page-text-wrapper h2.subtitle:last-child {
+    margin-bottom: 200px !important; 
+}
+
+
+.next-page-indicator {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 20px; 
+    text-align: right;
+}
+
+.next-page-indicator a {
+    font-size: 2em;
+    text-decoration: none;
+    color: var(--header-bg-color);
+}
+
+/* =========================================
+   ESTILO PEQUEÑO E ITÁLICO PARA PÁRRAFOS
+   ========================================= */
+.small-italic-text {
+    /* Tipografía */
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400; /* Regular */
+    font-style: italic; /* <--- Estilo Itálico */
+    
+    /* Tamaño: Un poco más pequeño que el texto de cuerpo (ej. 16px) */
+    font-size: 1rem; /* 16px */
+    
+    /* Mantenemos el color de texto normal */
+    color: var(--page-text-color, #333); 
+    
+    line-height: 1.5;
+    margin-bottom: 15px; /* Espaciado ajustado */
+}
+
+/* ======================================= */
+/* ESTILOS DE LA FICHA TÉCNICA (PiX Ficha) */
+/* ======================================= */
+
+/* ======================================= */
+/* ESTILOS DE LA FICHA TÉCNICA (PiX Ficha) */
+/* **SOLUCIÓN FINAL SIMPLE Y SIMÉTRICA** */
+/* ======================================= */
+
+.ficha-proyecto {
+    /* **1. LIMPIEZA TOTAL DE BORDES CONFLICTIVOS** */
+    border: none; /* Aseguramos que no haya bordes de caja */
+    box-shadow: none;
+    -webkit-mask: none;
+    mask: none;
+    
+    /* 2. CONTROL DE ALINEACIÓN Y LONGITUD (CORTE SIMÉTRICO) */
+    /* El margen izquierdo de 50px alinea el borde con el padding-left del texto */
+    margin-left: 50px;
+    /* El margen derecho de 120px crea el espacio de corte simétrico a la derecha */
+    margin-right: 120px;
+    
+    /* 3. DIBUJO DE LAS BARRAS NARANJAS (¡ESTO LAS VUELVE A CREAR!) */
+    border-top: 1px solid #f26649; 
+    border-bottom: 1px solid #f26649;
+    
+    /* 4. ESPACIADO VERTICAL Y LIMPIEZA */
+    margin-top: 40px;
+    margin-bottom: 80px;
+    padding-top: 50px;    /* Relleno interno para separar el texto de las barras */
+    padding-bottom: 50px; /* Relleno interno para separar el texto de las barras */
+    padding-left: 0; 
+    padding-right: 0;
+}
+
+.ficha-item {
+    /* ELIMINACIÓN DE SANGRÍA y ESPACIADO REDUCIDO */
+    
+    /* Elimina cualquier sangría o margen inicial no deseado */
+    margin-left: 0;
+    padding-left: 0;
+    font-family: 'Crimson Pro', serif; /* Aplicamos la tipografía deseada */
+    /* Menos distancia vertical entre cada ítem (haciéndola más compacta) */
+    margin-top: 9px; 
+    margin-bottom: 9px;
+    
+    line-height: 1.3; 
+    
+    /* TIPOGRAFÍA DISTINTA Y MÁS PEQUEÑA */
+    font-size: 0.85em; /* Tamaño reducido, ideal para una ficha informativa */
+    color: #333; /* Color de texto suave para el cuerpo */
+    
+    /* Aseguramos que la lista se alinee completamente a la izquierda */
+    text-align: left;
+}
+
+.ficha-item strong {
+    font-weight: 600; /* Negrita semi-bold para el título de la clave (Año, Equipo, etc.) */
+    color: #000; /* Color negro más sólido para enfatizar la clave */
+}
+
+/* ========================================= */
+/* CLASE DE TÍTULO ESPECÍFICA PARA CASOS DE USO */
+/* ========================================= */
+
+.case-title {
+    /* HEREDA EL ESTILO VISUAL DEL H1 GLOBAL */
+    font-family: 'Crimson Pro', serif;
+    font-weight: 600;
+    font-size: 2.25rem; 
+    color: var(--header-bg-color); /* Color Naranja */
+    text-indent: 0 !important;
+    /* CONTROL DE ALINEACIÓN Y ESPACIADO ESPECÍFICO */
+    
+    /* Alineación izquierda: El 50px viene del padding-left de .scrollable-content */
+    margin-left: 0; 
+    
+    /* Margen derecho: Esto acorta el título para evitar que se pegue al borde */
+    padding-right: 120px; /* Ajusta este valor (ej. 140px) para más espacio */
+    
+    /* Espaciado vertical */
+    margin-top: 0;
+    margin-bottom: 70px; /* Separa el título de la ficha */
+    text-align: left;
+}
+
+/* ========================================= */
+/* ESTILO PARA CITAS (Ej. Blockquotes o Textos Secundarios) */
+/* ========================================= */
+
+.page-text-wrapper .citation-text {
+    /* HERENCIA BÁSICA DE TU PÁRRAFO (.page-text-wrapper p) */
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400; /* Mantenemos el peso regular para legibilidad */
+    font-size: 1.1rem; /* Mismo tamaño que el párrafo principal */
+    color: var(--page-text-color, #333); 
+    line-height: 1.6;
+    text-indent: 0;
+    /* MODIFICACIÓN CLAVE: Estilo Itálico */
+    font-style: italic; 
+    
+    /* Espaciado ajustado para distinguirlo */
+    margin-bottom: 25px; 
+    margin-top: 25px; 
+    
+    /* Puedes añadir un color de fondo sutil si quieres más distinción, por ejemplo: */
+    /* background-color: rgba(227, 101, 59, 0.05); */
+    /* padding: 10px; */
+}
+
+/* ========================================= */
+/* ESTILO DE LA NAVEGACIÓN DE PÁGINA */
+/* ========================================= */
+
+.page-navigation {
+    
+    /* 💥 Alineamos el contenido a la derecha y le damos los mismos márgenes del texto */
+    text-align: right; 
+    padding-right: 120px; /* Margen derecho del texto */
+    padding-left: 50px;  /* Margen izquierdo del texto */
+    
+    padding-top: 50px; /* Espacio para separarlo del último párrafo */
+    padding-bottom: 50px; /* Espacio debajo del botón */
+}
+
+.page-navigation .nav-link {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--header-bg-color); /* Color naranja */
+    text-decoration: none;
+    margin-left: 20px; /* Espacio entre los botones Anterior y Siguiente */
+    transition: opacity 0.2s ease;
+}
+
+.page-navigation .nav-link:hover {
+    opacity: 0.8;
+}
+
+/* Estilo para las flechas (< y >) */
+.page-navigation .arrow-left,
+.page-navigation .arrow-right {
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+    margin: 0 5px; /* Espacio entre la palabra y la flecha */
+}
+
+/* Alineación de botones Anterior y Siguiente si están ambos */
+.page-navigation .prev {
+    float: left; /* Si hay un botón anterior, alinéalo a la izquierda */
+}
+
+
+.scroll-spacer {
+    height: 100px; /* Altura extra para "empujar" el contenido hacia abajo */
+}
+
+/* ========================================= */
+/* ESTILO DE LA NAVEGACIÓN DE PÁGINA */
+/* ========================================= */
+
+/* ... (mantén el resto de tu CSS para .page-navigation y .nav-link) ... */
+
+/* Estilo para el contenedor de las flechas (span) */
+.page-navigation .arrow-left,
+.page-navigation .arrow-right {
+    display: inline-flex; /* Usamos flex para centrar el SVG verticalmente */
+    align-items: center;
+    justify-content: center;
+    width: 1em; /* Ancho basado en el tamaño de la fuente del texto */
+    height: 1em; /* Altura basada en el tamaño de la fuente del texto */
+    margin: 0 5px; /* Espacio entre el texto y la flecha */
+    vertical-align: middle; /* Alineación vertical con el texto */
+}
+
+/* Estilo para los SVG dentro de los contenedores de flecha */
+.page-navigation .arrow-left svg,
+.page-navigation .arrow-right svg {
+    width: 100%; /* El SVG ocupa el 100% del ancho del span */
+    height: 100%; /* El SVG ocupa el 100% de la altura del span */
+    stroke: currentColor; /* Hereda el color del texto del enlace */
+    stroke-width: 2.5; /* Grosor de la línea de la flecha */
+    fill: none; /* Asegura que la flecha no tenga relleno */
+}
+
+/* ========================================= */
+/* CONTROL DE DESPLIEGUE SEPARADO POR FLECHA */
+/* ========================================= */
+
+/* El LI padre debe usar flex para alinear el enlace y la flecha */
+.sidebar-nav ul li.has-submenu {
+    /* 💥 CORRECCIÓN: Quitamos display: flex para que el texto y la flecha no floten */
+    /* display: flex; <--- ELIMINAR O COMENTAR ESTA LÍNEA */
+    
+    /* Restauramos la apariencia de lista completa */
+    display: block; 
+    position: relative; 
+    
+    /* Mantenemos el padding vertical que tenías en los enlaces normales */
+    padding: 0px;
+    margin: 0;
+    /* Quitamos el padding-right del LI si lo tenías */
+    /* padding-right: 20px; */ 
+    
+    list-style: none; /* Asegura que no tenga viñeta principal */
+}
+
+/* El enlace A puro (Casos de uso) */
+.sidebar-nav ul li a.nav-link-pure {
+    /* Quitamos flex-grow si lo tenías */
+    /* flex-grow: 1; */ 
+    
+    /* Aseguramos que el enlace se vea correctamente */
+    display: block;
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: #333; 
+    text-decoration: none;
+    position: relative;
+    /* Eliminamos el padding redundante ya que el LI lo tiene ahora */
+    padding: 35px 55px; 
+}
+
+/* 💥 FLECHA DE DESPLIEGUE - Posicionamiento Absoluto FINAL */
+.submenu-toggle-arrow {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    
+    position: absolute; 
+    right: 45px; 
+    top: 28px; 
+    
+    /* 💥 CRÍTICO: Definimos la traslación vertical en el estado base */
+    transform: none;
+    
+    padding: 15px 5px; 
+    line-height: 0; 
+    color: #333; 
+    z-index: 150;
+}
+
+.submenu-toggle-arrow.active {
+    /* 💥 Mantenemos la traslación vertical y añadimos la rotación */
+    transform: rotate(180deg);
+}
+
+/* Aplica el puntero al contenedor de la ilustración (mitad izquierda) */
+#p5-container {
+    /* Esto hace que el cursor cambie al puntero para indicar interactividad */
+    cursor: pointer;
+}
+/* =========================================
+   ESTILOS PARA IMÁGENES DENTRO DEL CONTENIDO
+   ========================================= */
+
+/* 1. Contenedor de la Imagen (Image Wrapper) */
+.image-wrapper {
+    /* HEREDA EL MARGEN DEL PÁRRAFO para alinearse perfectamente */
+    margin-left: 50px;
+    margin-right: 70px;
+    
+    /* MARGEN SUPERIOR e INFERIOR para separarse del texto */
+    margin-top: 50px; 
+    margin-bottom: 50px; 
+    
+    /* Asegura que no haya sangría en este contenedor */
+    text-indent: 0 !important;
+}
+
+/* 2. La Imagen en sí */
+.content-image {
+    /* CRÍTICO: Asegura que la imagen ocupe el 100% del ancho del contenedor */
+    width: 100%; 
+    
+    /* CRÍTICO: Mantiene la proporción original (no se deforma) */
+    height: auto; 
+    
+    /* Muestra la imagen como un bloque para eliminar cualquier espacio inferior no deseado */
+    display: block; 
+    
+    /* Opcional: Borde suave para el elemento visual */
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+}
+
+/* 3. Leyenda (opcional) */
+.image-caption {
+    /* Estilo para que la leyenda se vea diferente a un párrafo normal */
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+    text-align: right;
+    /* Elimina la sangría en la leyenda */
+    text-indent: 0 !important; 
+    
+    /* Ajusta el margen para que esté cerca de la imagen y separado del contenido siguiente */
+    margin-top: 10px; 
+    margin-bottom: 0;
+    margin-left: 0 !important;/* Aseguramos que la leyenda se alinee dentro del wrapper */
+  margin-right: 0 !important;
+    padding-left: 0;
+    padding-right: 0;
+}
+/* =========================================
+   ESTILOS PARA EL MODAL DE IMAGEN (LIGHTBOX)
+   ========================================= */
+
+/* Estilo del overlay (fondo translúcido) */
+.image-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed; /* Fijo en toda la ventana */
+    z-index: 1000; /* Asegura que esté por encima de todo */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Para scroll si la imagen es muy grande */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con 80% de opacidad */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque en el fondo, si es soportado */
+    -webkit-backdrop-filter: blur(5px);
+    transition: opacity 0.3s ease-in-out; /* Transición para una aparición suave */
+    opacity: 0; /* Empieza transparente */
+    justify-content: center; /* Centrar contenido con flex */
+    align-items: center; /* Centrar contenido con flex */
+    cursor: pointer; /* Indica que se puede hacer clic para cerrar */
+}
+
+/* Cuando el modal está activo */
+.image-modal.active {
+    display: flex; /* Muestra el modal */
+    opacity: 1; /* Lo hace visible */
+}
+
+/* Contenedor del contenido del modal (para la imagen y botón de cierre) */
+.modal-content-wrapper {
+    position: relative;
+    max-width: 70%; /* Limita el ancho máximo para la imagen */
+    max-height: 70%; /* Limita la altura máxima para la imagen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none; /* Permite que el clic en el overlay cierre el modal */
+    
+}
+
+/* La imagen dentro del modal */
+#modalImage {
+    max-width: 100%; /* La imagen no excede el ancho del contenedor */
+    max-height: 100%; /* La imagen no excede la altura del contenedor */
+    display: block;
+    object-fit: contain; /* Asegura que la imagen completa sea visible sin cortar */
+    transition: transform 0.3s ease-in-out; /* Transición para el escalado */
+    pointer-events: auto; /* La imagen en sí es clickeable/interactiva */
+}
+
+/* Botón de cierre (la 'x') */
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+    cursor: pointer;
+    z-index: 1001; /* Asegura que el botón esté sobre la imagen */
+    pointer-events: auto; /* Hace que el botón sea clickeable */
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* =========================================
+   ESTILO DE CURSOR PARA IMÁGENES CLICKABLES
+   ========================================= */
+
+.clickable-image-container {
+    /* ... otros estilos, si los hay ... */
+    
+    /* 🔥 PROPIEDAD CLAVE: Cambia el cursor a un puntero */
+    cursor: pointer; 
+}
+
+/* Bloqueo de Clics cuando el Menú está ACTIVO */
+/* Utilizamos una pseudo-clase en el contenedor principal si el menú está activo.
+   Asumiendo que el menú lateral está detrás de .screen-content. */
+
+.screen-content.interior-page-content.menu-open .main-content.page-layout::after {
+    content: '';
+    /* Posicionamiento fijo para cubrir toda la ventana */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* Transparente, pero activo para clics */
+    background: transparent; 
+    /* El z-index debe ser más bajo que el menú (z-index: 110) pero más alto que el canvas y el contenido */
+    z-index: 105; 
+    pointer-events: auto; /* CRÍTICO: Asegura que esta capa intercepte los clics */
+}
