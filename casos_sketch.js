@@ -11,7 +11,7 @@ const s = (p) => {
     let moved = false;
     let tex; // Variable para la textura
 
-    const ORANGE = "#E64B19";
+    const ORANGE = "#E3653B";
     const LILAC = "#EDE4F2"; 
 
     p.setup = function() {

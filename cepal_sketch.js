@@ -56,7 +56,7 @@ function setup() {
             let y = j * (size + gap) + gap + size / 2;
 
             let palette = [
-                color("#E64B19"),
+                color("#E3653B"),
                 color("#F2F0EF"),
                 color("#EDE4F2"),
             ];

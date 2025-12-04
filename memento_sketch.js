@@ -59,7 +59,7 @@ function setup() {
             let y = j * (size + gap) + gap + size / 2;
 
             let palette = [
-                color("#E64B19"), // Naranja
+                color("#E3653B"), // Naranja
                 color("#F2F0EF"), // Blanco roto
                 color("#EDE4F2"), // Lila suave
             ];

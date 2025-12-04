@@ -25,11 +25,12 @@ let tex;
 
 // Probabilidades (ajusta a gusto)
 const P_TEXTURE = 0.25; // 25% con textura negra
-const P_ORANGE  = 0.40; // 40% naranja sólido
-const P_LILAC   = 0.35; // 35% lila sólido
+const P_ORANGE  = 0.40; // 40% naranja sólido
+const P_LILAC   = 0.35; // 35% lila sólido
 
-const ORANGE = "#E64B19";
-const LILAC  = "#EDE4F2";
+// --- CAMBIO DE COLOR REALIZADO AQUÍ ---
+const ORANGE = "#E3653B"; // Nuevo tono de naranja solicitado
+const LILAC  = "#EDE4F2";
 
 function setup() {
     // 1. CREAR CANVAS CON TAMAÑO FIJO Y EN MODO WEBGL
@@ -42,7 +43,10 @@ function setup() {
     cnv.style('display', 'block');
     cnv.style('margin', 'auto'); // Centrado horizontal
     cnv.style('position', 'absolute');
-    cnv.style('top', '0');
+    
+    // --- MODIFICACIÓN: Margen superior aumentado a 50px ---
+    cnv.style('top', '50px'); 
+    
     cnv.style('bottom', '0');
     cnv.style('left', '0');
     cnv.style('right', '0'); // Centrado completo dentro del contenedor
@@ -79,13 +83,13 @@ function generarTriangulos() {
             let useTexture = false;
             let c = color(ORANGE);
             if (r < P_TEXTURE) {
-                useTexture = true;                 // negro texturizado (poco)
+                useTexture = true;                 // negro texturizado (poco)
                 c = null;
             } else if (r < P_TEXTURE + P_ORANGE) {
-                useTexture = false;                // naranja sólido (mayoría)
+                useTexture = false;                // naranja sólido (mayoría)
                 c = color(ORANGE);
             } else {
-                useTexture = false;                // lila sólido
+                useTexture = false;                // lila sólido
                 c = color(LILAC);
             }
             // ------------------------------------------------------------
@@ -187,16 +191,16 @@ class Tri {
             noStroke();
             beginShape();
             texture(tex);
-            vertex(-this.size/2,  this.size/2, 0,           tex.height);
-            vertex( this.size/2,  this.size/2, tex.width,   tex.height);
-            vertex(-this.size/2, -this.size/2, 0,           0);
+            vertex(-this.size/2,  this.size/2, 0,           tex.height);
+            vertex( this.size/2,  this.size/2, tex.width,   tex.height);
+            vertex(-this.size/2, -this.size/2, 0,           0);
             endShape(CLOSE);
         } else {
             noStroke();
             fill(this.col);
             triangle(
-                -this.size/2,  this.size/2,
-                this.size/2,  this.size/2,
+                -this.size/2,  this.size/2,
+                this.size/2,  this.size/2,
                 -this.size/2, -this.size/2
             );
         }

@@ -1,50 +1,57 @@
-// --- LÓGICA: Triángulos con Textura y Colores Sólidos (Naranja/Lila/Gris) ---
+// La función 'setup' se ejecuta una sola vez al inicio.
 
-// 1. CONSTANTES DE DIMENSIÓN
-// Canvas físico deseado: 11.4 cm x 12.325 cm 
+// --- Menos textura, más color sólido (naranja/lila) ---
+
+// 0. FACTOR DE ESCALA: Reduce el tamaño del canvas proporcionalmente
+const SCALE_FACTOR = 0.8; 
+
+// Base Canvas físico: 17.4 cm x 18.3 cm
 const DPI = 96;
 const CM2PX = DPI / 2.54;
 
-// Dimensiones finales del canvas
-const W = Math.round(13 * CM2PX); // Ancho: ~430 px
-const H = Math.round(16 * CM2PX); // Alto: ~465 px
+// Dimensiones originales (sin escalar)
+const BASE_W = 17.4; 
+const BASE_H = 18.3;
 
-// 2. VARIABLES GLOBALES
+// 1. Dimensiones finales del Canvas (escaladas)
+const W = Math.round(BASE_W * CM2PX * SCALE_FACTOR); // Ancho fijo escalado
+const H = Math.round(BASE_H * CM2PX * SCALE_FACTOR); // Alto fijo escalado
+
 let triangles = [];
-let cols = 8, rows = 10;
+let cols = 6, rows = 6;
 let gap = 4;
 let moved = false;
-let tex; // Objeto de textura de grano
+let tex;
 
-// 3. CONSTANTES DE COLOR Y PROBABILIDAD
-// Probabilidades ajustadas
-const P_TEXTURE = 0.20; // 20% textura negra
+// Probabilidades (ajusta a gusto)
+const P_TEXTURE = 0.25; // 25% con textura negra
 const P_ORANGE  = 0.40; // 40% naranja sólido
-const P_LILAC   = 0.20; // 20% lila sólido
-const P_GRAY    = 0.20; // 20% gris sólido
+const P_LILAC   = 0.35; // 35% lila sólido
 
-const ORANGE = "#E64B19";
+// --- CAMBIO DE COLOR REALIZADO AQUÍ ---
+const ORANGE = "#E3653B"; // Nuevo tono de naranja solicitado
 const LILAC  = "#EDE4F2";
-const GRAY   = "#E5E5E5";
 
-// Función de configuración inicial (se ejecuta una vez)
 function setup() {
-    // Crea el canvas con las dimensiones calculadas y en modo WEBGL
-    let cnv = createCanvas(W, H, WEBGL);
+    // 1. CREAR CANVAS CON TAMAÑO FIJO Y EN MODO WEBGL
+    let cnv = createCanvas(W, H, WEBGL); // Usa W y H escalados
 
-    // Adjunta el canvas al contenedor HTML llamado 'p5-container'
-    // Asegúrate de que tu index.html tiene un div con ese id.
-    cnv.parent('p5-container'); 
+    // 2. MUY IMPORTANTE: Colocar el canvas dentro del contenedor en el HTML 
+    cnv.parent('p5-container');
+
+    // Opcional: Centrar el canvas dentro de su contenedor #p5-container 
     cnv.style('display', 'block');
-    cnv.style('margin', 'auto');
-
-    cnv.style('margin-left', 'auto');
-cnv.style('margin-right', 'auto');
-cnv.style('margin-top', '30px'); // <--- NUEVO MARGEN SUPERIOR
+    cnv.style('margin', 'auto'); // Centrado horizontal
+    cnv.style('position', 'absolute');
     
-    frameRate(30);
+    // --- MODIFICACIÓN: Margen superior aumentado ---
+    cnv.style('top', '50px'); // Se cambió de '0' a '50px' para dar más margen arriba
+    
+    cnv.style('bottom', '0');
+    cnv.style('left', '0');
+    cnv.style('right', '0'); // Centrado completo dentro del contenedor
 
-    // Creación de la textura de grano negra
+    // textura de grano negra
     tex = createGraphics(200, 200);
     tex.background(255);
     tex.noStroke();
@@ -56,47 +63,36 @@ cnv.style('margin-top', '30px'); // <--- NUEVO MARGEN SUPERIOR
     generarTriangulos();
 }
 
-// Función para guardar el canvas al presionar 'S'
-function keyTyped() {
-    if (key === 's' || key === 'S') {
-        saveCanvas('partitura_pix', 'png');
-        console.log("¡Canvas guardado como partitura_pix.png!");
-    }
-}
-
-// Función para inicializar y distribuir los triángulos en la rejilla
 function generarTriangulos() {
     triangles = [];
 
-    // Calcula el tamaño máximo de celda disponible
     let w = (width - gap * (cols + 1)) / cols;
     let h = (height - gap * (rows + 1)) / rows;
-    let size = min(w, h); 
+    let size = min(w, h);
 
     for (let i = 0; i < cols; i++) {
         for (let j = 0; j < rows; j++) {
-            if (random() < 0.05) continue; // 5% de probabilidad de dejar la celda vacía
+            if (random() < 0.20) continue; // deja algunos espacios en blanco
 
-            // Posición central de la celda en coordenadas WEBGL (centro es 0,0)
+            // centros de celda (WEBGL: coordenadas del centro son 0,0)
             let x = i * (size + gap) + gap + size / 2 - width / 2;
             let y = j * (size + gap) + gap + size / 2 - height / 2;
 
-            // Selección de color/textura basado en las probabilidades
+            // --- BLOQUE: selección de estilo ---
             let r = random();
             let useTexture = false;
-            let c;
-
+            let c = color(ORANGE);
             if (r < P_TEXTURE) {
-                useTexture = true;
+                useTexture = true;                 // negro texturizado (poco)
                 c = null;
             } else if (r < P_TEXTURE + P_ORANGE) {
+                useTexture = false;                // naranja sólido (mayoría)
                 c = color(ORANGE);
-            } else if (r < P_TEXTURE + P_ORANGE + P_LILAC) {
-                c = color(LILAC);
             } else {
-                // Color gris
-                c = color(GRAY);
+                useTexture = false;                // lila sólido
+                c = color(LILAC);
             }
+            // ------------------------------------------------------------
 
             let ang = random([0, HALF_PI, PI, 3 * HALF_PI]);
             triangles.push(new Tri(x, y, size, useTexture, c, ang));
@@ -104,15 +100,14 @@ function generarTriangulos() {
     }
 }
 
-// Bucle principal de dibujo 
 function draw() {
     background(255);
     for (let t of triangles) t.show();
 }
 
-// Función que maneja la reorganización de los bloques al hacer clic
 function mousePressed() {
-    // Aseguramos que el click esté dentro del canvas
+    // 🛑 NUEVA VERIFICACIÓN DE LÍMITES 🛑
+    // Solo si el clic está dentro de las coordenadas del canvas (0 a width/height)
     if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
         return;
     }
@@ -129,17 +124,14 @@ function mousePressed() {
         for (let t of triangles) {
             let placed = false;
 
-            // 20% de probabilidad de crear un bloque 2x2
+            // algunos bloques 2x2
             if (random() < 0.2) {
                 for (let i = 0; i < cols - 1 && !placed; i++) {
                     for (let j = 0; j < rows - 1 && !placed; j++) {
-                        // Verifica si las 4 celdas están disponibles
                         if (grid[i][j] && grid[i+1][j] && grid[i][j+1] && grid[i+1][j+1]) {
                             grid[i][j] = grid[i+1][j] = grid[i][j+1] = grid[i+1][j+1] = false;
-                            
-                            // Calcula la posición y tamaño para el bloque 2x2 (incluyendo el gap/2 de offset)
-                            t.targetX = i * (baseSize + gap) + gap + baseSize - width / 2 + gap/2;
-                            t.targetY = j * (baseSize + gap) + gap + baseSize - height / 2 + gap/2;
+                            t.targetX = i * (baseSize + gap) + gap + baseSize - width / 2;
+                            t.targetY = j * (baseSize + gap) + gap + baseSize - height / 2;
                             t.targetSize = baseSize * 2 + gap;
                             t.angle = random([0, HALF_PI, PI, 3 * HALF_PI]);
                             placed = true;
@@ -148,14 +140,12 @@ function mousePressed() {
                 }
             }
 
-            // Si no se colocó en 2x2, coloca en una celda 1x1 disponible
+            // celda 1x1
             if (!placed) {
                 for (let i = 0; i < cols && !placed; i++) {
                     for (let j = 0; j < rows && !placed; j++) {
                         if (grid[i][j]) {
                             grid[i][j] = false;
-                            
-                            // Calcula la posición y tamaño para el bloque 1x1
                             t.targetX = i * (baseSize + gap) + gap + baseSize / 2 - width / 2;
                             t.targetY = j * (baseSize + gap) + gap + baseSize / 2 - height / 2;
                             t.targetSize = baseSize;
@@ -168,7 +158,7 @@ function mousePressed() {
         }
         moved = true;
     } else {
-        // Volver al estado original
+        // volver al estado original
         for (let t of triangles) {
             t.targetX = t.xOriginal;
             t.targetY = t.yOriginal;
@@ -179,7 +169,7 @@ function mousePressed() {
     }
 }
 
-// -------- Clase Tri (Maneja la lógica del triángulo individual) --------
+// -------- Tri con animación de tamaño --------
 class Tri {
     constructor(x, y, s, useTexture, col, angle) {
         this.xOriginal = x; this.yOriginal = y; this.sizeOriginal = s;
@@ -188,9 +178,7 @@ class Tri {
         this.useTexture = useTexture; this.col = col;
         this.angle = angle; this.angleOriginal = angle;
     }
-    
     show() {
-        // Interpolación lineal para animar suavemente la posición y el tamaño
         this.x = lerp(this.x, this.targetX, 0.12);
         this.y = lerp(this.y, this.targetY, 0.12);
         this.size = lerp(this.size, this.targetSize, 0.12);
@@ -200,22 +188,19 @@ class Tri {
         rotate(this.angle);
 
         if (this.useTexture) {
-            // Dibuja el triángulo con la textura de grano negro (WEBGL)
             noStroke();
             beginShape();
             texture(tex);
-            // Coordenadas del triángulo y mapeo UV de la textura
-            vertex(-this.size/2,  this.size/2, 0,          tex.height);
-            vertex( this.size/2,  this.size/2, tex.width,  tex.height);
-            vertex(-this.size/2, -this.size/2, 0,          0);
+            vertex(-this.size/2,  this.size/2, 0,           tex.height);
+            vertex( this.size/2,  this.size/2, tex.width,   tex.height);
+            vertex(-this.size/2, -this.size/2, 0,           0);
             endShape(CLOSE);
         } else {
-            // Dibuja el triángulo con color sólido
             noStroke();
             fill(this.col);
             triangle(
                 -this.size/2,  this.size/2,
-                 this.size/2,  this.size/2,
+                this.size/2,  this.size/2,
                 -this.size/2, -this.size/2
             );
         }
@@ -223,7 +208,7 @@ class Tri {
     }
 }
 
-// -------- Utilidad: Algoritmo Fisher-Yates para mezclar un array --------
+// -------- Utilidad --------
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
         const j = floor(random(i + 1));

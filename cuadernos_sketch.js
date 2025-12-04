@@ -66,7 +66,7 @@ function setup() {
     let numTriangles = numTotalElements - numIcons; 
 
     // Colores de la paleta anterior
-    let palette = [color("#E64B19"), color("#F2F0EF"), color("#EDE4F2")];
+    let palette = [color("#E3653B"), color("#F2F0EF"), color("#EDE4F2")];
 
     // --- CREAR TRIÁNGULOS ---
     for (let k = 0; k < numTriangles; k++) {

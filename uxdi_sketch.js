@@ -62,7 +62,7 @@ function setup() {
 
             // Paleta de colores (la misma que en los casos anteriores)
             let palette = [
-                color("#E64B19"), // Naranja
+                color("#E3653B"), // Naranja
                 color("#F2F0EF"), // Blanco roto
                 color("#EDE4F2"), // Lila suave
             ];

@@ -1,33 +1,41 @@
 // --- teoria_sketch.js ---
 // Partitura PiX (Lila y Textura)
-// CORREGIDO: El clic solo funciona sobre el canvas gracias a la verificación de límites en p.mousePressed.
+// CORREGIDO: Se aumenta la escala a 0.92 para que sea más grande (similar a las otras),
+// manteniendo la alineación superior fija en 100px.
 
 const teoriaSketch = (p) => { 
     let triangles = [];
     let cols, rows;
-    let gap = 10;
+    let gap = 10; 
     let moved = false;
     let tex;
-    // Se elimina canvasElement ya que no usaremos event listeners nativos, sino p.mousePressed
 
     const LILAC = "#EDE4F2";
+    
+    // --- FACTOR DE ESCALA AUMENTADO ---
+    const SCALE = 0.92; // Aumentado de 0.8 a 0.92
+    const W_ORIGINAL = 530;
+    const H_ORIGINAL = 700;
 
     p.setup = function() {
-        const canvas = p.createCanvas(530, 700, p.WEBGL);
+        // 1. Creamos el canvas con el nuevo tamaño escalado
+        const canvas = p.createCanvas(W_ORIGINAL * SCALE, H_ORIGINAL * SCALE, p.WEBGL);
         canvas.parent('p5-container');
 
-        // --- AJUSTE CSS INLINE PARA CENTRADO ---
-        const container = document.getElementById('p5-container');
-        if (container) {
-            container.style.display = 'flex';
-            container.style.justifyContent = 'center'; 
-            container.style.alignItems = 'center'; 
-            container.style.height = '100%'; 
-            container.style.padding = '40px 0'; 
-        }
+        // --- AJUSTE DE POSICIÓN ---
         canvas.style('display', 'block');
-        canvas.style('margin', '0'); 
-        // --- FIN AJUSTE CSS ---
+        canvas.style('margin', 'auto'); 
+        canvas.style('position', 'absolute');
+        
+        // 2. Alineación Superior: MANTENIDA en 100px (alineada al título)
+        canvas.style('top', '100px');    
+        
+        // 3. Margen Inferior: Automático. Al crecer la imagen, ocupará más espacio hacia abajo,
+        // pero debería quedar bien dentro de la columna.
+        canvas.style('bottom', 'auto');  
+        
+        canvas.style('left', '0');
+        canvas.style('right', '0');     
 
         p.noStroke();
         p.frameRate(30);
@@ -69,10 +77,8 @@ const teoriaSketch = (p) => {
         for (let t of triangles) t.show();
     }
 
-    // 🔥 REINTRODUCIMOS p.mousePressed CON VERIFICACIÓN DE LÍMITES 🔥
+    // 🔥 p.mousePressed 🔥
     p.mousePressed = function() {
-        // 🔥 ESTO ES LA CLAVE: Si el clic está fuera del canvas (coordenadas < 0 o > width/height),
-        // la función termina ANTES de que se ejecute la lógica de reorganización.
         if (p.mouseX < 0 || p.mouseX > p.width || p.mouseY < 0 || p.mouseY > p.height) {
             return; 
         }
@@ -93,7 +99,6 @@ const teoriaSketch = (p) => {
             for (let t of triangles) {
                 let placed = false;
 
-                // 20% piezas grandes (2x2)
                 if (p.random() < 0.2) {
                     for (let i = 0; i < cols - 1 && !placed; i++) {
                         for (let j = 0; j < rows - 1 && !placed; j++) {
@@ -102,7 +107,6 @@ const teoriaSketch = (p) => {
                                 grid[i][j] = grid[i+1][j] = false;
                                 grid[i][j+1] = grid[i+1][j+1] = false;
                                 
-                                // Coordenadas corregidas para centrar 2x2 en WEBGL
                                 t.targetX = i * (baseSize + gap) + gap + baseSize * 1.5 - p.width / 2;
                                 t.targetY = j * (baseSize + gap) + gap + baseSize * 1.5 - p.height / 2;
                                 
@@ -115,7 +119,6 @@ const teoriaSketch = (p) => {
                     }
                 }
 
-                // Piezas 1×1
                 if (!placed) {
                     for (let i = 0; i < cols && !placed; i++) {
                         for (let j = 0; j < rows && !placed; j++) {
@@ -168,7 +171,7 @@ const teoriaSketch = (p) => {
             this.angle = angle;
             this.angleOriginal = angle;
         }
-
+        
         show() {
             this.x = p.lerp(this.x, this.targetX, 0.1);
             this.y = p.lerp(this.y, this.targetY, 0.1);
@@ -182,21 +185,19 @@ const teoriaSketch = (p) => {
                 p.noStroke();
                 p.beginShape();
                 p.texture(tex);
-                p.vertex(-this.size/2, this.size/2, 0, tex.height);
-                p.vertex( this.size/2, this.size/2, tex.width, tex.height);
-                p.vertex(-this.size/2, -this.size/2, 0, 0);
+                p.vertex(-this.size/2,  this.size/2, 0,          tex.height);
+                p.vertex( this.size/2,  this.size/2, tex.width,  tex.height);
+                p.vertex(-this.size/2, -this.size/2, 0,          0);
                 p.endShape(p.CLOSE);
-
             } else {
                 p.noStroke();
                 p.fill(this.col);
                 p.triangle(
-                    -this.size/2, this.size/2,
-                    this.size/2, this.size/2,
+                    -this.size/2,  this.size/2,
+                     this.size/2,  this.size/2,
                     -this.size/2, -this.size/2
                 );
             }
-
             p.pop();
         }
     }
@@ -206,7 +207,6 @@ const teoriaSketch = (p) => {
             p.saveCanvas('grid_triangular_lila', 'png');
     }
 
-    // Hace que shuffleArray sea accesible desde la instancia
     p.shuffleArray = function(arr) {
         for (let i = arr.length - 1; i > 0; i--) {
             let j = p.floor(p.random(i + 1));
@@ -216,4 +216,3 @@ const teoriaSketch = (p) => {
 };
 
 let myp5Teoria = new p5(teoriaSketch);
-// SE ELIMINA LA FUNCIÓN mousePressed() GLOBAL

@@ -77,7 +77,7 @@ const s_bibliografia = (p) => {
 
                 // 4. Lógica de color de este sketch
                 let palette = [
-                    p.color("#E64B19"),
+                    p.color("#E3653B"),
                     p.color("#F2F0EF"),
                     p.color("#EDE4F2"),
                 ];
@@ -215,7 +215,7 @@ const s_bibliografia = (p) => {
             if (d < t.size / 2) {
                 t.iconType = (t.iconType + 1) % TOTAL_ICON_TYPES; 
                 
-                let palette = [p.color("#E64B19"), p.color("#F2F0EF"), p.color("#EDE4F2")];
+                let palette = [p.color("#E3653B"), p.color("#F2F0EF"), p.color("#EDE4F2")];
                 t.col = p.random(palette);
                 
                 return; // Detiene el loop
@@ -266,7 +266,7 @@ const s_bibliografia = (p) => {
                 // TIPO > 0: Icono SVG
                 
                 // Lógica de Tinte (Naranja sí, otros no)
-                if (this.col.toString() === p.color("#E64B19").toString()) {
+                if (this.col.toString() === p.color("#E3653B").toString()) {
                     p.tint(this.col); 
                 } else {
                     p.noTint(); 

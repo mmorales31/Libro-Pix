@@ -508,7 +508,7 @@ body {
     /* SOLUCIÓN VISIBILIDAD: Reducimos el margin-top para que aparezca inmediatamente */
     margin-top: 40px; 
     margin-bottom: 40px; 
-    
+    margin-right: 70px;
     text-align: left;
     margin-left: 50px; /* CORRECCIÓN CLAVE: Elimina el margin-left de 50px */
 }
@@ -988,4 +988,111 @@ body {
     /* El z-index debe ser más bajo que el menú (z-index: 110) pero más alto que el canvas y el contenido */
     z-index: 105; 
     pointer-events: auto; /* CRÍTICO: Asegura que esta capa intercepte los clics */
+}
+/* --- 1. Contenedor Principal: Aplica Márgenes y Alineación FLEXBOX --- */
+.icon-paragraph-wrapper {
+    /* Aquí replicamos los márgenes laterales de los párrafos normales */
+    margin-left: 50px; 
+    margin-right: 70px;
+    
+    /* Replicamos el margen vertical inferior del párrafo base */
+    margin-bottom: 35px;
+    margin-top: 0; /* O ajusta si quieres más espacio arriba */
+    
+    /* Alineación de Icono y Texto */
+    display: flex;
+    /* Usamos flex-start para asegurar que todo el contenido empiece arriba */
+    align-items: flex-start; 
+}
+
+/* --- 2. Contenedor del Icono: Estructura del Círculo --- */
+.icon-simple-float {
+    flex-shrink: 0;
+    width: 50px; 
+    height: 50px;
+    border-radius: 80%; 
+   
+    
+    /* Centrado del ícono (imagen) */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    
+    /* Espacio entre el círculo y el inicio del texto */
+    margin-right: 12px; 
+    
+    /* Ajuste vertical: baja el icono para que esté más centrado con la primera línea de texto */
+    margin-top: 0.5px; 
+}
+
+.icon-simple-float .pencil-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* --- 3. El Párrafo de Texto dentro del Bloque --- */
+.icon-paragraph-wrapper p {
+    /* HEREDAMOS y/o ANULAMOS el estilo de .page-text-wrapper p */
+    flex-grow: 1; /* Ocupa el espacio restante */
+    
+    /* ANULAMOS los márgenes laterales del estilo base */
+    margin: 0; 
+    
+    /* ANULAMOS la sangría de la primera línea (text-indent) */
+    text-indent: 0; 
+
+    /* REPLICAMOS los estilos de fuente, color y altura de línea del estilo base */
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--page-text-color, #3f3f3f); 
+    line-height: 1.6;
+}
+
+.subtitle a {
+    text-decoration: none; /* Quita el subrayado */
+    color: inherit;        /* Hereda el color que ya tenía el h2 */
+}
+
+/* Opcional: Para que cambie de color al pasar el mouse */
+.subtitle a:hover {
+    color: gray; 
+}
+/* Aseguramos que el main ocupe el espacio y ordene sus hijos */
+.main-content {
+    display: flex;
+    justify-content: space-between; /* Separa la imagen de los botones */
+    align-items: center; /* Centrado vertical general */
+    width: 100%;
+    height: 100vh; /* Altura completa de la pantalla */
+    position: relative;
+}
+
+/* El contenedor de la imagen toma todo el espacio disponible */
+.book-container {
+    flex-grow: 1; /* Ocupa todo el espacio sobrante a la izquierda de los botones */
+    display: flex;
+    justify-content: center; /* Centra la imagen horizontalmente */
+    align-items: center; /* Centra la imagen verticalmente */
+    height: 100%;
+}
+
+/* Estilos para controlar el tamaño de la imagen */
+.imagen-central {
+    /* Ajustamos los límites para permitir que sea más grande */
+    max-width: 90%; 
+    max-height: 90vh; 
+    transform: translateX(-100px) translateY(-40px) rotate(1.6deg) scale(1.1);
+    
+    object-fit: contain; 
+    display: block;
+   } 
+
+/* Ajuste para asegurar que los botones se queden a la derecha */
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre botones */
+    padding-right: 40px; /* Margen derecho para que no peguen al borde */
+    z-index: 10;
 }
