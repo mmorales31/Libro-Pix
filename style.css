@@ -1080,8 +1080,8 @@ body {
 /* Estilos para controlar el tamaño de la imagen */
 .imagen-central {
     /* Ajustamos los límites para permitir que sea más grande */
-    max-width: 90%; 
-    max-height: 90vh; 
+    max-width: 110%; 
+    max-height: 110vh; 
     transform: translateX(-100px) translateY(-40px) rotate(1.6deg) scale(1.1);
     
     object-fit: contain; 
@@ -1095,4 +1095,41 @@ body {
     gap: 15px; /* Espacio entre botones */
     padding-right: 40px; /* Margen derecho para que no peguen al borde */
     z-index: 10;
+}
+/* =========================================
+   ESTILOS ESPECÍFICOS PARA BIBLIOGRAFÍA (APA 7)
+   ========================================= */
+
+.biblio-item {
+    /* Mismos estilos base que tus párrafos */
+    font-family: 'Crimson Pro', serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: var(--page-text-color, #333);
+    line-height: 1.6;
+    
+    /* Mantenemos tus márgenes laterales */
+    margin-right: 70px;
+    margin-left: 50px;
+    
+    /* Espaciado entre referencias */
+    margin-bottom: 25px;
+    
+    /* 💥 TRUCO PARA SANGRÍA FRANCESA (Hanging Indent) */
+    text-indent: -2.5em !important; /* "Tira" la primera línea a la izquierda */
+    padding-left: 2.5em; /* Empuja todo el bloque a la derecha */
+    
+    /* Asegura que los enlaces largos no rompan el diseño */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.biblio-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.biblio-item a:hover {
+    text-decoration: underline;
+    color: var(--header-bg-color); /* Tu color naranja al pasar el mouse */
 }
